@@ -1,9 +1,10 @@
 /// <reference types = "Cypress" />
 
+const { url } = require("inspector")
+
 describe('Get API User Test', () => 
 {
-    let authtoken = '9746ddc8d401c5eb5775d9680c94c49db6b16f969f5b5e10df548929e68069e2'
-    let homeurl = 'http://jsonplaceholder.typicode.com/'
+    let homeurl = 'http://jsonplaceholder.typicode.com/users/'
     
     it('TC1', () => 
     {
@@ -11,10 +12,8 @@ describe('Get API User Test', () =>
         cy.request({
 
             method : 'GET',
-            url : homeurl+'users',
-            headers : {
-                'authorization' : "Bearer " + authtoken
-            }
+            url : homeurl
+
         }).then((res) =>{
             expect(res.status).to.eq(200)
             //Missing total count of users
@@ -27,14 +26,12 @@ describe('Get API User Test', () =>
         cy.request({
 
             method : 'GET',
-            url : homeurl+'users/?id=8',
-            headers : {
-                'authorization' : "Bearer " + authtoken
-            }
+            url : homeurl+'/8'
+
         }).then((response) =>{
             expect(response.status).to.eq(200)
-            //expect(response).contains('Nicholas Runolfsdottir V')
-            //Missing Verify if user with id8 is Nicholas Runolfsdottir V
+            cy.log(JSON.stringify(response))
+            expect(response.body).has.property('name', 'Nicholas Runolfsdottir V')
         })
 
     })
@@ -45,13 +42,36 @@ describe('Get API User Test', () =>
         cy.request({
 
             method : 'POST',
-            url : homeurl+'posts',
-            headers : {
-                'authorization' : "Bearer " + authtoken
-            }
+            url : homeurl,
+
+            body : {
+                    "id": "11",
+                    "name": "Jojo Smith",
+                    "username": "Jojo",
+                    "email": "star@platinum.stand",
+                    "address": {
+                        "street": "Kulas Light",
+                        "suite": "Apt. 556",
+                        "city": "Gwenborough",
+                        "zipcode": "92998-3874",
+                        "geo": {
+                            "lat": "-37.3159",
+                            "lng": "81.1496"
+                        }
+                    },
+                    "phone": "1-770-736-8031 x56442",
+                    "website": "hildegard.org",
+                    "company": {
+                        "name": "Romaguera-Crona",
+                        "catchPhrase": "Multi-layered client-server neural-net",
+                        "bs": "harness real-time e-markets"
+                    }
+                }
+
         }).then((response) =>{
             expect(response.status).to.eq(201)
+            expect(response.body).has.property('id', 11)
+            expect(response.body).has.property('username', 'Jojo')
         })
-        //Missing Verify that the posted data are showing up in the result
     })
 })
