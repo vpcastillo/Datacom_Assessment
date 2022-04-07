@@ -16,7 +16,7 @@ describe('Get API User Test', () =>
 
         }).then((response) =>{
             expect(response.status).to.eq(200)
-            expect(response.body).to.have.length.of.at.most(10)
+            expect(response.body.length).to.equal(10)
         })
     })
 
