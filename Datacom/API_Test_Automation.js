@@ -70,7 +70,9 @@ describe('Get API User Test', () =>
         }).then((response) =>{
             expect(response.status).to.eq(201)
             expect(response.body).has.property('id', 11)
+            expect(response.body).has.property('name', 'Jotaro Kujo')
             expect(response.body).has.property('username', 'Jojo')
+            expect(response.body).has.property('email', 'star@platinum.stand')
         })
     })
 })
