@@ -45,7 +45,7 @@ describe('Get API User Test', () =>
 
             body : {
                     "id": "11",
-                    "name": "Jojo Smith",
+                    "name": "Jotaro Kujo",
                     "username": "Jojo",
                     "email": "star@platinum.stand",
                     "address": {
