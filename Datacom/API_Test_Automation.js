@@ -47,7 +47,6 @@ describe('Get API User Test', () =>
 
         }).then((response) =>{
             expect(response.status).to.eq(200)
-            expect(response.body.length).to.equal(10)
 
             let uId = response.body.length +1            
 
