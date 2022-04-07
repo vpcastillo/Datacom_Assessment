@@ -27,7 +27,7 @@ describe('Get API User Test', () =>
         cy.request({
 
             method : 'GET',
-            url : homeurl+'users/8',
+            url : homeurl+'users/?id=8',
             headers : {
                 'authorization' : "Bearer " + authtoken
             }
