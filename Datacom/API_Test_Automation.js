@@ -14,9 +14,9 @@ describe('Get API User Test', () =>
             method : 'GET',
             url : homeurl
 
-        }).then((res) =>{
-            expect(res.status).to.eq(200)
-            //Missing total count of users
+        }).then((response) =>{
+            expect(response.status).to.eq(200)
+            expect(response.body).to.have.length.of.at.most(10)
         })
     })
 
@@ -30,7 +30,6 @@ describe('Get API User Test', () =>
 
         }).then((response) =>{
             expect(response.status).to.eq(200)
-            cy.log(JSON.stringify(response))
             expect(response.body).has.property('name', 'Nicholas Runolfsdottir V')
         })
 
